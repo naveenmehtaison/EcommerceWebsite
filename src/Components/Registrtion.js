@@ -1,30 +1,13 @@
 import { useState } from "react"
 import { Button, Card, Col, Container, Row,Navbar } from "react-bootstrap"
 import { Form } from "react-bootstrap"
-
-
+import Cart from "./Cart/Cart"
 const Register=()=>{
-    let [state ,setstate]=useState({
-        user:{
-            username:'',
-            email:'',
-            password:''
-    
-        }
-    })
-    let updateInput=(e)=>{
-        setstate({
-            ...state,
-            user:{
-                ...state.user,
-                [e.target.name]:e.target.value
-            }
-        })
-    }
-    const SubmitFunc=(e)=>{
+    const [showcart,setshowcart]=useState(false)
+    const cartHandler=(e)=>{
         e.preventDefault()
-        setstate({...state},e.target.value)
-
+        setshowcart(!showcart)
+        console.log('inside cart handler',showcart)
     }
     return(
         <>
@@ -40,7 +23,7 @@ const Register=()=>{
                    About
                 </Navbar.Brand>
                 <Navbar.Brand style={{color:'white'}} href='/'>
-                   <Button>Cart</Button>
+                   <Button  onClick={cartHandler}>Cart</Button>
                 </Navbar.Brand>
                 </Container> 
             </Navbar>
@@ -48,7 +31,9 @@ const Register=()=>{
                 <Card.Title  >
                     <h1  class='mt-2 display-1' align='center'>The  Genrics</h1>
                 </Card.Title>
+
             </Card>
+            {showcart && <Cart></Cart> }
         </>
 
     )

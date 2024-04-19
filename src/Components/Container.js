@@ -1,4 +1,4 @@
-import { Container, Row ,Col, Card, Button} from "react-bootstrap"
+import { Container, Row ,Col, Card, Button,display} from "react-bootstrap"
 import { useState } from "react"
 import React from "react"
 const Containerr=(props)=>{
@@ -55,9 +55,12 @@ const Containerr=(props)=>{
                                 <img src={ele.imageUrl} alt={ele.title}></img>
                                 <p>$ {ele.price}</p>
                                 <Button >Add To Cart</Button>
+                                
                             </React.Fragment>
                         ))}
+                        <hr></hr>
                     </Col>
+                    
                     <Col >
                         {productsArr.slice(productsArr.length/2,productsArr.length).map((ele, item) => (
                             <React.Fragment key={item}>
@@ -65,10 +68,20 @@ const Containerr=(props)=>{
                                 <img src={ele.imageUrl} alt={ele.title}></img>
                                 <p>$ {ele.price}</p>
                                 <Button >Add To Cart</Button>
+                                <hr></hr>
                             </React.Fragment>
-                        ))}
+                            
+                        ))} 
+                        <hr></hr>
                     </Col>
                 </Row>
+                {/* <Button onClick={props.onCart}></Button> */}
+                <Card  style={{ height: '8rem',background:'#ADD8E6' }}>
+                    <Card.Footer class='display-1'>
+                        <p align='center'>The generics</p>
+
+                    </Card.Footer>
+                </Card>
             </>
 
 

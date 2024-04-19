@@ -4,6 +4,7 @@ import Button from 'react-bootstrap/Button';
 import Containerr from './Components/Container'
 import { Accordion ,Badge,  Navbar,Container} from "react-bootstrap";
 import Register from './Components/Registrtion';
+import CartButton from './Components/Cart/CartButton';
 function App() {
   return (
     <div>
@@ -15,9 +16,9 @@ function App() {
           </Container>  */}
        
       <Register>
-        
       </Register>
       <Containerr></Containerr>
+      <CartButton></CartButton>
     </div>
   );
 }
