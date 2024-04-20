@@ -5,9 +5,10 @@ import Containerr from './Components/Container'
 import { Accordion ,Badge,  Navbar,Container} from "react-bootstrap";
 import Register from './Components/Registrtion';
 import CartButton from './Components/Cart/CartButton';
+import StoreContext from './Store/StoreContext';
 function App() {
   return (
-    <div>
+    <StoreContext>
       {/* <Navbar bg='success' expand='sm' variant='light'>
          {/* <Container>
           <Navbar.Brand href='/'>
@@ -18,8 +19,7 @@ function App() {
       <Register>
       </Register>
       <Containerr></Containerr>
-      <CartButton></CartButton>
-    </div>
+    </StoreContext>
   );
 }
 

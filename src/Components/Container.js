@@ -1,7 +1,10 @@
 import { Container, Row ,Col, Card, Button,display} from "react-bootstrap"
-import { useState } from "react"
+import { useState,useContext } from "react"
+import DataContext from "../Store/auth-context"
 import React from "react"
 const Containerr=(props)=>{
+    const Ctx = useContext(DataContext)
+    console.log(Ctx)
     const productsArr = [
 
         {
@@ -11,6 +14,7 @@ const Containerr=(props)=>{
         price: 100,
         
         imageUrl: 'https://prasadyash2411.github.io/ecom-website/img/Album%201.png',
+        quantity:0
         
         },
         
@@ -21,6 +25,7 @@ const Containerr=(props)=>{
         price: 50,
         
         imageUrl: 'https://prasadyash2411.github.io/ecom-website/img/Album%202.png',
+        quantity:0
         
         },
         
@@ -31,6 +36,7 @@ const Containerr=(props)=>{
         price: 70,
         
         imageUrl: 'https://prasadyash2411.github.io/ecom-website/img/Album%203.png',
+        quantity:0
         
         },
         
@@ -41,10 +47,18 @@ const Containerr=(props)=>{
         price: 100,
         
         imageUrl: 'https://prasadyash2411.github.io/ecom-website/img/Album%204.png',
+        quantity:0
         
         }
         
         ]
+    const AddtoCart=(ele,item)=>{
+        // console.log(ele[item])
+        // ele.quantity=0
+        Ctx.additem(ele,item)
+        // console.log(ele)
+
+    }
     return(
             <>
                 <Row className="justify-content-md-center" xs={3}>
@@ -54,7 +68,7 @@ const Containerr=(props)=>{
                                 <p>{ele.title}</p>
                                 <img src={ele.imageUrl} alt={ele.title}></img>
                                 <p>$ {ele.price}</p>
-                                <Button >Add To Cart</Button>
+                                <Button onClick={()=>{AddtoCart(ele,item)}}>Add To Cart</Button>
                                 
                             </React.Fragment>
                         ))}
@@ -67,7 +81,7 @@ const Containerr=(props)=>{
                                 <p>{ele.title}</p>
                                 <img src={ele.imageUrl} alt={ele.title}></img>
                                 <p>$ {ele.price}</p>
-                                <Button >Add To Cart</Button>
+                                <Button  onClick={()=>{AddtoCart(ele,item)}}>Add To Cart</Button>
                                 <hr></hr>
                             </React.Fragment>
                             

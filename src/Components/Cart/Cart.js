@@ -1,10 +1,11 @@
 import { Button , Row,Col,Card} from "react-bootstrap";
 import CartButton from "./CartButton";
 import classes from './Cart.module.css'
-import { useState } from "react";
+import { useState,useContext } from "react";
+import DataContext from "../../Store/auth-context";
 const Cart=()=>{
     console.log('inside cart,js')
-    
+    const Ctx= useContext(DataContext)
     const cartElements = [
 
         {
@@ -44,26 +45,20 @@ const Cart=()=>{
         }
         
         ]
-    const [arr,setarr]=useState([cartElements])
-    const HandleDel=(ele,items)=>{
-        const arr = cartElements.filter((elef,itemsf)=>
-
-            items!==itemsf
-           
-        )
-        console.log(ele)
-        setarr(arr)
-        console.log(arr)
-
-
+    const [arr,setarr]=useState(Ctx.arr)
+    const HandleDel = (ele, items) => {
+        // console.log('hello');
+        // const arr2 = arr.filter((ele1,item) => ele.imageUrl!== ele1.imageUrl);
+        // console.log(cartElements, ele, items);
+        // setarr([...arr2]); // Assuming setArr is a state updater function
+        // console.log(arr);
+        Ctx.removeitem(ele,items)
+        setarr(Ctx.arr)
+        // console.log(Ctx.arr.length)
     }
+    
     return(
         <>
-           
-
-        
-
-
             <div className={classes.modal}>
                 <h1 align='center'>CART</h1>
                 <Row>
@@ -78,7 +73,7 @@ const Cart=()=>{
                     
                     </Col>
                 </Row>
-                {arr.map((ele,items)=>{
+                {Ctx.arr.map((ele,items)=>{
                     return(
                     <Row>
                         <Col>
