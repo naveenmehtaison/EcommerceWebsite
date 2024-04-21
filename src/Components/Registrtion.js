@@ -2,6 +2,7 @@ import { useState } from "react"
 import { Button, Card, Col, Container, Row,Navbar } from "react-bootstrap"
 import { Form } from "react-bootstrap"
 import Cart from "./Cart/Cart"
+import {  NavLink } from "react-router-dom"
 const Register=()=>{
     const [showcart,setshowcart]=useState(false)
     const cartHandler=(e)=>{
@@ -13,15 +14,16 @@ const Register=()=>{
         <>
             <Navbar bg='black' expand='sm' variant='light'>
                 <Container>
-                <Navbar.Brand style={{color:'white'}} href='/'>
+                <Navbar.Brand style={{color:'white'}} href='http://localhost:3000/about'>
                    Home
                 </Navbar.Brand>
                 <Navbar.Brand style={{color:'white'}} href='/'>
                    Store
                 </Navbar.Brand>
-                <Navbar.Brand style={{color:'white'}} href='/'>
-                   About
+                <Navbar.Brand style={{color:'white'}}>
+                    <NavLink to="/about" style={{color:'white'}}>About</NavLink>
                 </Navbar.Brand>
+
                 <Navbar.Brand style={{color:'white'}} href='/'>
                    <Button  onClick={cartHandler}>Cart</Button>
                 </Navbar.Brand>
