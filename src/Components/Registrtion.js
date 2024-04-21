@@ -14,8 +14,9 @@ const Register=()=>{
         <>
             <Navbar bg='black' expand='sm' variant='light'>
                 <Container>
-                <Navbar.Brand style={{color:'white'}} href='http://localhost:3000/about'>
-                   Home
+                <Navbar.Brand style={{color:'white'}}>
+                        <NavLink to="/home">Home</NavLink>
+                   
                 </Navbar.Brand>
                 <Navbar.Brand style={{color:'white'}} href='/'>
                    Store
