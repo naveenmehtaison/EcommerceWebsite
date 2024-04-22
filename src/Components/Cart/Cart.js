@@ -3,6 +3,7 @@ import CartButton from "./CartButton";
 import classes from './Cart.module.css'
 import { useState,useContext } from "react";
 import DataContext from "../../Store/auth-context";
+import axios from "axios";
 const Cart=()=>{
     console.log('inside cart,js')
     const Ctx= useContext(DataContext)
@@ -46,14 +47,17 @@ const Cart=()=>{
         
         ]
     const [arr,setarr]=useState(Ctx.arr)
-    const HandleDel = (ele, items) => {
-        // console.log('hello');
-        // const arr2 = arr.filter((ele1,item) => ele.imageUrl!== ele1.imageUrl);
-        // console.log(cartElements, ele, items);
-        // setarr([...arr2]); // Assuming setArr is a state updater function
-        // console.log(arr);
+    async function HandleDel  (ele, items) {
+        try{
+
+            const response = axios.delete(`https://crudcrud.com/api/bfd3cbd42bcf4c948bebd4fbec5d4f84/ecom/${ele._id}`)
+        
         Ctx.removeitem(ele,items)
-        setarr(Ctx.arr)
+        setarr(response)
+        }
+        catch(err){
+            console.log(err)
+        }
         // console.log(Ctx.arr.length)
     }
     
@@ -73,7 +77,7 @@ const Cart=()=>{
                     
                     </Col>
                 </Row>
-                {Ctx.arr.map((ele,items)=>{
+                {arr.map((ele,items)=>{
                     return(
                     <Row>
                         <Col>

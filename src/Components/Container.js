@@ -2,6 +2,7 @@ import { Container, Row ,Col, Card, Button,display} from "react-bootstrap"
 import { useState,useContext } from "react"
 import DataContext from "../Store/auth-context"
 import React from "react"
+
 const Containerr=(props)=>{
     const Ctx = useContext(DataContext)
     console.log(Ctx)
@@ -52,10 +53,19 @@ const Containerr=(props)=>{
         }
         
         ]
-    const AddtoCart=(ele,item)=>{
+    async function AddtoCart(ele,item){
+        const requestOptions = {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(ele)
+        };
+        const j = fetch('https://crudcrud.com/api/bfd3cbd42bcf4c948bebd4fbec5d4f84/ecom', requestOptions)
+            .then(response => response.json())
+            .then(data => Ctx.additem(data,item));
+            
         // console.log(ele[item])
         // ele.quantity=0
-        Ctx.additem(ele,item)
+        // Ctx.additem(ele,item)
         // console.log(ele)
 
     }
