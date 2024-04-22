@@ -4,61 +4,30 @@ import classes from './Cart.module.css'
 import { useState,useContext } from "react";
 import DataContext from "../../Store/auth-context";
 import axios from "axios";
-const Cart=()=>{
+function Cart(){
+    const [loading,setisloading] = useState(false)
+
+
+
     console.log('inside cart,js')
     const Ctx= useContext(DataContext)
-    const cartElements = [
-
-        {
-        
-        title: 'Colors',
-        
-        price: 100,
-        
-        imageUrl: 'https://prasadyash2411.github.io/ecom-website/img/Album%201.png',
-        
-        quantity: 2,
-        
-        },
-        
-        {
-        
-        title: 'Black and white Colors',
-        
-        price: 50,
-        
-        imageUrl: 'https://prasadyash2411.github.io/ecom-website/img/Album%202.png',
-        
-        quantity: 3,
-        
-        },
-        
-        {
-        
-        title: 'Yellow and Black Colors',
-        
-        price: 70,
-        
-        imageUrl: 'https://prasadyash2411.github.io/ecom-website/img/Album%203.png',
-        
-        quantity: 1,
-        
-        }
-        
-        ]
     const [arr,setarr]=useState(Ctx.arr)
     async function HandleDel  (ele, items) {
+        setisloading(true)
         try{
+            console.log(ele)
 
-            const response = axios.delete(`https://crudcrud.com/api/bfd3cbd42bcf4c948bebd4fbec5d4f84/ecom/${ele._id}`)
+            const response = await axios.delete(`https://crudcrud.com/api/79eac66889cd4d5cbf3778784dc5f585/ecom/${ele._id}`)
+            const responseData= response.data
         
-        Ctx.removeitem(ele,items)
-        setarr(response)
+            Ctx.removeitem(ele,items)
+            setarr(responseData)
         }
         catch(err){
             console.log(err)
         }
         // console.log(Ctx.arr.length)
+        setisloading(false)
     }
     
     return(
@@ -77,7 +46,7 @@ const Cart=()=>{
                     
                     </Col>
                 </Row>
-                {arr.map((ele,items)=>{
+                {!loading && Ctx.arr.map((ele,items)=>{
                     return(
                     <Row>
                         <Col>
@@ -91,6 +60,8 @@ const Cart=()=>{
                         </Col>
                     </Row>)
                 })}
+                {loading && <p>loading..</p>}
+
 
             </div>
         </>

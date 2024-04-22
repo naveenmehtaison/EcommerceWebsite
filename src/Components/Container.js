@@ -2,10 +2,10 @@ import { Container, Row ,Col, Card, Button,display} from "react-bootstrap"
 import { useState,useContext } from "react"
 import DataContext from "../Store/auth-context"
 import React from "react"
-
+import axios from "axios";
 const Containerr=(props)=>{
     const Ctx = useContext(DataContext)
-    console.log(Ctx)
+    console.log(Ctx.arr)
     const productsArr = [
 
         {
@@ -54,20 +54,9 @@ const Containerr=(props)=>{
         
         ]
     async function AddtoCart(ele,item){
-        const requestOptions = {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(ele)
-        };
-        const j = fetch('https://crudcrud.com/api/bfd3cbd42bcf4c948bebd4fbec5d4f84/ecom', requestOptions)
-            .then(response => response.json())
-            .then(data => Ctx.additem(data,item));
-            
-        // console.log(ele[item])
-        // ele.quantity=0
-        // Ctx.additem(ele,item)
-        // console.log(ele)
-
+        const j = await axios.post('https://crudcrud.com/api/79eac66889cd4d5cbf3778784dc5f585/ecom',ele)
+        Ctx.additem(j.data,item)
+        console.log(j.data)
     }
     return(
             <>

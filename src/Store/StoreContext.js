@@ -1,16 +1,7 @@
 import DataContext from "./auth-context";
 import React, { useState, useContext} from "react";
 const StoreContext=(props)=>{
-    const [arr,setarr]= useState([        {
-        
-        title: 'Blue Color',
-        
-        price: 100,
-        
-        imageUrl: 'https://prasadyash2411.github.io/ecom-website/img/Album%204.png',
-        quantity:0
-        
-        }])
+    const [arr,setarr]= useState([])
     // const Ctx = DataContext.createContext()
     const additemFunc = (props, item) => {
         let found= false
