@@ -3,7 +3,7 @@ import { Row, Col,Card } from "react-bootstrap"
 const About = ()=>{
     return(
         <>
-            <Register/>
+
             <Row className="justify-content-md-center" xs={2}>
                 <Col>
                     <img src='https://media.istockphoto.com/id/144220369/photo/rock-band-silhouette.webp?b=1&s=170667a&w=0&k=20&c=hYuEq_uhtHQHtVlreevpjqx9TYJ1toPMd7u7E_THGcI='></img>

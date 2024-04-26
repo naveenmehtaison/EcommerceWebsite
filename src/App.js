@@ -1,36 +1,29 @@
-// import Mainpage from "./Components/Mainpage";
-import { RouterProvider, createBrowserRouter } from 'react-router-dom';
-import Home from './Components/pages/Home';
-import Alert from 'react-bootstrap/Alert';
-import Button from 'react-bootstrap/Button';
-import Containerr from './Components/Container'
-import { Accordion ,Badge,  Navbar,Container} from "react-bootstrap";
-import Register from './Components/Registrtion';
-import CartButton from './Components/Cart/CartButton';
-import About from './Components/pages/About';
-import StoreContext from './Store/StoreContext';
-import Contact from './Components/pages/Contact';
-const router = createBrowserRouter([{
-  path:'/home',element:<Home/>
-},
-{
-  path:'/about',element:<About/>
-},
-{ path:'/contactus',element:<Contact/>},
-{path:'/',element:      <StoreContext>      
-<Register>
-</Register>
-<Containerr></Containerr>
 
-</StoreContext>}])
+import Register from './Components/Registrtion';
+import MyRoutes from './Route/MyRoutes';
+
+
 function App() {
   return (
-    <>
-
-      <RouterProvider router={router}/>
-
-    
+    <main>
+      <Register/>
+      <>
+    <MyRoutes/>
     </>
+    </main>
+
+
+    // <main>
+    //   <Home/>
+    //   <div>
+    //     <Router>
+    //       <Route path='http://localhost:3000/home'><Home/></Route>
+    //       <Route path='/about'><About/></Route>
+    //       <Route path='/contactus'><Contact/></Route>
+    //       <Route path='http://localhost:3000/store'><StoreContext/></Route>
+    //     </Router>
+    //   </div>
+    // </main>
   )
 }
 

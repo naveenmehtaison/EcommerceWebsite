@@ -3,6 +3,9 @@ import { useState,useContext } from "react"
 import DataContext from "../Store/auth-context"
 import React from "react"
 import axios from "axios";
+import { Route } from "react-router-dom";
+import { useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 const Containerr=(props)=>{
     const Ctx = useContext(DataContext)
     console.log(Ctx.arr)
@@ -62,9 +65,10 @@ const Containerr=(props)=>{
             <>
                 <Row className="justify-content-md-center" xs={3}>
                     <Col > 
+                        <div>
                         {productsArr.slice(0,productsArr.length/2).map((ele, item) => (
                             <React.Fragment key={item}>
-                                <p>{ele.title}</p>
+                                <li><Link to={`/store/${item}`}>{ele.title}</Link ></li>
                                 <img src={ele.imageUrl} alt={ele.title}></img>
                                 <p>$ {ele.price}</p>
                                 <Button onClick={()=>{AddtoCart(ele,item)}}>Add To Cart</Button>
@@ -72,12 +76,13 @@ const Containerr=(props)=>{
                             </React.Fragment>
                         ))}
                         <hr></hr>
+                        </div>
                     </Col>
                     
                     <Col >
                         {productsArr.slice(productsArr.length/2,productsArr.length).map((ele, item) => (
                             <React.Fragment key={item}>
-                                <p>{ele.title}</p>
+                                <li><Link to={`/store/${item}`}>{ele.title}</Link ></li>
                                 <img src={ele.imageUrl} alt={ele.title}></img>
                                 <p>$ {ele.price}</p>
                                 <Button  onClick={()=>{AddtoCart(ele,item)}}>Add To Cart</Button>

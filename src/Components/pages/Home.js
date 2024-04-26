@@ -11,7 +11,6 @@ const Home=()=>{
     
     return(
         <>
-            <Register/>
             <Row className="justify-content-md-center" xs={2}>
                 <Col className="mt-4">
                     {concertsInIndia.map((ele,item)=>(

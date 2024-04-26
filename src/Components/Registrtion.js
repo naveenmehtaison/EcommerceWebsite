@@ -2,8 +2,9 @@ import { useState ,useContext} from "react"
 import { Button, Card, Col, Container, Row,Navbar } from "react-bootstrap"
 import { Form } from "react-bootstrap"
 import Cart from "./Cart/Cart"
-import {  NavLink } from "react-router-dom"
+
 import axios from "axios"
+import {  NavLink } from 'react-router-dom';
 import DataContext from "../Store/auth-context"
 const Register=()=>{
     const [err,seterr]=useState(null)
@@ -29,22 +30,23 @@ const Register=()=>{
     }
     
     return(
-        
         <>
+        
+
             <Navbar bg='black' expand='sm' variant='light'>
                 <Container>
                 <Navbar.Brand style={{color:'white'}}>
                         <NavLink to="/home">Home</NavLink>
                    
                 </Navbar.Brand>
-                <Navbar.Brand style={{color:'white'}} href='/'>
-                   Store
+                <Navbar.Brand style={{color:'white'}} >
+                    <NavLink to="/store" style={{color:'white'}}>Store</NavLink>
                 </Navbar.Brand>
                 <Navbar.Brand style={{color:'white'}}>
                     <NavLink to="/about" style={{color:'white'}}>About</NavLink>
                 </Navbar.Brand>
                 <Navbar.Brand style={{color:'white'}}>
-                    <NavLink to="/contactus" style={{color:'white'}}>Contact US</NavLink>
+                    <NavLink to="/contact" style={{color:'white'}}>Contact US</NavLink>
                 </Navbar.Brand>
                 <Navbar.Brand style={{color:'white'}} href='/'>
                    <Button  onClick={cartHandler}>Cart</Button>
