@@ -4,27 +4,36 @@ import classes from './Cart.module.css'
 import { useState,useContext } from "react";
 import DataContext from "../../Store/auth-context";
 import axios from "axios";
-function Cart(){
+function Cart(props){
+    const [err,seterr]=useState(null)
     const [loading,setisloading] = useState(false)
+    console.log(props.props)
+    // if(props.props==false){
+    //     console.log('true hai')
+    //     seterr(true)
+    // }
 
 
 
     console.log('inside cart,js')
     const Ctx= useContext(DataContext)
     const [arr,setarr]=useState(Ctx.arr)
+   
     async function HandleDel  (ele, items) {
+        
         setisloading(true)
         try{
             console.log(ele)
 
-            const response = await axios.delete(`https://crudcrud.com/api/79eac66889cd4d5cbf3778784dc5f585/ecom/${ele._id}`)
+            const response = await axios.delete(`https://crudcrud.com/api/a26364ec3170447a90a00c68ae8ad247/ecom/${ele._id}`)
             const responseData= response.data
         
             Ctx.removeitem(ele,items)
             setarr(responseData)
         }
         catch(err){
-            console.log(err)
+            console.log(err.message)
+            setarr(err.message)
         }
         // console.log(Ctx.arr.length)
         setisloading(false)
@@ -32,6 +41,7 @@ function Cart(){
     
     return(
         <>
+
             <div className={classes.modal}>
                 <h1 align='center'>CART</h1>
                 <Row>
@@ -46,7 +56,12 @@ function Cart(){
                     
                     </Col>
                 </Row>
-                {!loading && Ctx.arr.map((ele,items)=>{
+                {!props.props && !loading && Ctx.arr.length==0&&
+                
+                    <p>Cart is Empty</p>
+                }
+                {err && <p>{err.message}</p>}
+                {!props.props && !loading  && !err && Ctx.arr.map((ele,items)=>{
                     return(
                     <Row>
                         <Col>
@@ -60,7 +75,8 @@ function Cart(){
                         </Col>
                     </Row>)
                 })}
-                {loading && <p>loading..</p>}
+                {props.props && <p>loading..</p> && <p>'Something went wrong ....Retrying <Button onClick={()=>{props.props=true}}>Retrying</Button></p>}
+                
 
 
             </div>

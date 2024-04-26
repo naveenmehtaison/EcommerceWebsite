@@ -9,12 +9,14 @@ import Register from './Components/Registrtion';
 import CartButton from './Components/Cart/CartButton';
 import About from './Components/pages/About';
 import StoreContext from './Store/StoreContext';
+import Contact from './Components/pages/Contact';
 const router = createBrowserRouter([{
   path:'/home',element:<Home/>
 },
 {
   path:'/about',element:<About/>
 },
+{ path:'/contactus',element:<Contact/>},
 {path:'/',element:      <StoreContext>      
 <Register>
 </Register>
@@ -24,12 +26,7 @@ const router = createBrowserRouter([{
 function App() {
   return (
     <>
-      {/* <StoreContext>      
-        <Register>
-        </Register>
-        <Containerr></Containerr>
-        
-      </StoreContext> */}
+
       <RouterProvider router={router}/>
 
     

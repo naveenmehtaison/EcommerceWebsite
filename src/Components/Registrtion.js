@@ -6,23 +6,30 @@ import {  NavLink } from "react-router-dom"
 import axios from "axios"
 import DataContext from "../Store/auth-context"
 const Register=()=>{
+    const [err,seterr]=useState(null)
     const [showcart,setshowcart]=useState(false)
     const Ctx = useContext(DataContext)
     async function cartHandler(e) {
+        setshowcart(!showcart);
+        
         e.preventDefault();
         console.log(Ctx.arr)
         try {
-            const response = await axios.get('https://crudcrud.com/api/79eac66889cd4d5cbf3778784dc5f585/ecom');
+            const response = await axios.get('https://crudcrud.com/api/a26364ec3170447a90a00c68ae8ad24/ecom');
             const responseData = response.data; // Accessing the data property of the response
-            setshowcart(!showcart);
+            
             Ctx.setarr(responseData);
             console.log('inside cart handler', showcart);
+            seterr(false)
         } catch (error) {
             console.error('Error fetching cart items:', error);
+            seterr(true)
+            // setTimeout((cartHandler(e)),500000)
         }
     }
     
     return(
+        
         <>
             <Navbar bg='black' expand='sm' variant='light'>
                 <Container>
@@ -36,7 +43,9 @@ const Register=()=>{
                 <Navbar.Brand style={{color:'white'}}>
                     <NavLink to="/about" style={{color:'white'}}>About</NavLink>
                 </Navbar.Brand>
-
+                <Navbar.Brand style={{color:'white'}}>
+                    <NavLink to="/contactus" style={{color:'white'}}>Contact US</NavLink>
+                </Navbar.Brand>
                 <Navbar.Brand style={{color:'white'}} href='/'>
                    <Button  onClick={cartHandler}>Cart</Button>
                 </Navbar.Brand>
@@ -48,7 +57,8 @@ const Register=()=>{
                 </Card.Title>
 
             </Card>
-            {showcart && <Cart></Cart> }
+            {/* {!err && showcart && <Cart></Cart> } */}
+            {showcart && <Cart props={err}></Cart> }
         </>
 
     )
