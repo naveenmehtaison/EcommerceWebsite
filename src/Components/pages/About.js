@@ -1,6 +1,8 @@
 import Register from "../Registrtion"
+import { useParams } from "react-router-dom"
 import { Row, Col,Card } from "react-bootstrap"
 const About = ()=>{
+
     return(
         <>
 

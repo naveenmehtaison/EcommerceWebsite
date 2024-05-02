@@ -36,6 +36,9 @@ const Register=()=>{
             <Navbar bg='black' expand='sm' variant='light'>
                 <Container>
                 <Navbar.Brand style={{color:'white'}}>
+                    <NavLink to="/login" style={{color:'white'}}>Login</NavLink>
+                </Navbar.Brand>
+                <Navbar.Brand style={{color:'white'}}>
                         <NavLink to="/home">Home</NavLink>
                    
                 </Navbar.Brand>
@@ -51,6 +54,8 @@ const Register=()=>{
                 <Navbar.Brand style={{color:'white'}} href='/'>
                    <Button  onClick={cartHandler}>Cart</Button>
                 </Navbar.Brand>
+
+
                 </Container> 
             </Navbar>
             <Card backgroud-color='grey' class='mt-1' style={{ height: '10rem' ,background:'grey'}}>

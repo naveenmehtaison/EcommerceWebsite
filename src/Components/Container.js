@@ -12,6 +12,7 @@ const Containerr=(props)=>{
     const productsArr = [
 
         {
+        id:'1',
         
         title: 'Colors',
         
@@ -23,6 +24,7 @@ const Containerr=(props)=>{
         },
         
         {
+            id:'2',
         
         title: 'Black and white Colors',
         
@@ -34,6 +36,7 @@ const Containerr=(props)=>{
         },
         
         {
+            id:'3',
         
         title: 'Yellow and Black Colors',
         
@@ -45,6 +48,7 @@ const Containerr=(props)=>{
         },
         
         {
+            id:'4',
         
         title: 'Blue Color',
         
@@ -68,7 +72,7 @@ const Containerr=(props)=>{
                         <div>
                         {productsArr.slice(0,productsArr.length/2).map((ele, item) => (
                             <React.Fragment key={item}>
-                                <li><Link to={`/store/${item}`}>{ele.title}</Link ></li>
+                                <li><Link to={`/store/${ele.id}`}>{ele.title}</Link ></li>
                                 <img src={ele.imageUrl} alt={ele.title}></img>
                                 <p>$ {ele.price}</p>
                                 <Button onClick={()=>{AddtoCart(ele,item)}}>Add To Cart</Button>
@@ -82,7 +86,7 @@ const Containerr=(props)=>{
                     <Col >
                         {productsArr.slice(productsArr.length/2,productsArr.length).map((ele, item) => (
                             <React.Fragment key={item}>
-                                <li><Link to={`/store/${item}`}>{ele.title}</Link ></li>
+                                <li><Link to={`/store/${ele.id}`}>{ele.title}</Link ></li>
                                 <img src={ele.imageUrl} alt={ele.title}></img>
                                 <p>$ {ele.price}</p>
                                 <Button  onClick={()=>{AddtoCart(ele,item)}}>Add To Cart</Button>
