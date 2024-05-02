@@ -2,6 +2,7 @@ import DataContext from "./auth-context";
 import React, { useState, useContext} from "react";
 const StoreContext=(props)=>{
     const [arr,setarr]= useState([])
+    const [login,setlogin] = useState(false)
     // const Ctx = DataContext.createContext()
     const additemFunc = (props, item) => {
         let found= false
@@ -34,11 +35,16 @@ const StoreContext=(props)=>{
     const setarrfunc=(Arr)=>{
         setarr(Arr)
     }
+    const loginfunc=()=>{
+        setlogin(!login)
+    }
     const StoreContext2 = {
         additem:additemFunc,
         removeitem:removeItemFunc,
         arr:arr,
-        setarr:setarrfunc
+        setarr:setarrfunc,
+        login:loginfunc,
+        islog:login
     }
     return(
         <DataContext.Provider value={StoreContext2}>

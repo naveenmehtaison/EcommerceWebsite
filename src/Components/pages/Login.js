@@ -1,20 +1,26 @@
 import axios from 'axios' 
 import { useNavigate } from 'react-router-dom'
+import { useContext } from 'react'
+import DataContext from '../../Store/auth-context'
 const Login=()=>{
+    const Ctx = useContext(DataContext)
     const navigate = useNavigate()
     async function hanldeSubmit(e){
         try{
             e.preventDefault()
             const obj = {Email:e.target.email.value, Password:e.target.password.value}
-            const response = await 
-            axios.post('https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyBDR5SSxYk2jPHpBjbYZNPoa76PPAmRPdo',{
-            email: obj.Email,
-            password: obj.Password,
-            returnSecureToken: true 
-        })}
+            console.log(obj)
+            const response = await axios.post('https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyBDR5SSxYk2jPHpBjbYZNPoa76PPAmRPdo', {
+                email: obj.Email,
+                password: obj.Password,
+                returnSecureToken: true 
+            })
+            Ctx.login()
+        }
         catch(err){
             console.log(err + 'erroer occured')
         }
+        console.log(Ctx)
         navigate('/store')
 
 

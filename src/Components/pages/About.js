@@ -1,7 +1,11 @@
 import Register from "../Registrtion"
 import { useParams } from "react-router-dom"
 import { Row, Col,Card } from "react-bootstrap"
+import DataContext from "../../Store/auth-context"
+import { useContext } from "react"
 const About = ()=>{
+    const Ctx = useContext(DataContext)
+    console.log(Ctx)
 
     return(
         <>
