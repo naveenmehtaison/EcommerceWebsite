@@ -21,11 +21,12 @@ function Cart(props){
    
     async function HandleDel  (ele, items) {
         
+        
         setisloading(true)
         try{
             console.log(ele)
 
-            const response = await axios.delete(`https://crudcrud.com/api/a26364ec3170447a90a00c68ae8ad247/ecom/${ele._id}`)
+            const response = await axios.delete(`https://crudcrud.com/api/3da97b9609784182ab428b91f1be7ec0/${Ctx.curemail}/${ele._id}`)
             const responseData= response.data
         
             Ctx.removeitem(ele,items)

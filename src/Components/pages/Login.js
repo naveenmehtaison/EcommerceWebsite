@@ -16,6 +16,16 @@ const Login=()=>{
                 returnSecureToken: true 
             })
             Ctx.login()
+            const arr = obj.Email.split("")
+            console.log('arr',arr)
+            const fil_arr = arr.filter((ele,item)=>(
+                ele!= '@' && ele!='.'
+            ))
+            const fin_email = fil_arr.join('')
+            console.log(fin_email)
+            console.log(fin_email)
+            Ctx.email(fin_email)
+            console.log(Ctx)
         }
         catch(err){
             console.log(err + 'erroer occured')

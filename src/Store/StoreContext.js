@@ -36,7 +36,11 @@ const StoreContext=(props)=>{
         setarr(Arr)
     }
     const loginfunc=()=>{
-        setlogin(!login)
+        setlogin(true)
+    }
+    const [email ,setemail] = useState('')
+    const emailfunc=(props)=>{
+        setemail(props)
     }
     const StoreContext2 = {
         additem:additemFunc,
@@ -44,7 +48,9 @@ const StoreContext=(props)=>{
         arr:arr,
         setarr:setarrfunc,
         login:loginfunc,
-        islog:login
+        islog:login,
+        email:emailfunc,
+        curemail:email
     }
     return(
         <DataContext.Provider value={StoreContext2}>

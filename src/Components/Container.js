@@ -61,9 +61,11 @@ const Containerr=(props)=>{
         
         ]
     async function AddtoCart(ele,item){
-        const j = await axios.post('https://crudcrud.com/api/a26364ec3170447a90a00c68ae8ad247/ecom',ele)
+        console.log(Ctx)
+        const j = await axios.post(`https://crudcrud.com/api/3da97b9609784182ab428b91f1be7ec0/${Ctx.curemail}`,ele)
         Ctx.additem(j.data,item)
         console.log(j.data)
+        
     }
     return(
             <>

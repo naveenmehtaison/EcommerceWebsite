@@ -16,7 +16,7 @@ const Register=()=>{
         e.preventDefault();
         console.log(Ctx.arr)
         try {
-            const response = await axios.get('https://crudcrud.com/api/a26364ec3170447a90a00c68ae8ad24/ecom');
+            const response = await axios.get(`https://crudcrud.com/api/3da97b9609784182ab428b91f1be7ec0/${Ctx.curemail}`);
             const responseData = response.data; // Accessing the data property of the response
             
             Ctx.setarr(responseData);
