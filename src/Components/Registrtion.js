@@ -7,37 +7,28 @@ import axios from "axios"
 import {  NavLink } from 'react-router-dom';
 import DataContext from "../Store/auth-context"
 const Register=()=>{
+
     const [err,seterr]=useState(null)
     const [showcart,setshowcart]=useState(false)
     const Ctx = useContext(DataContext)
-    async function cartHandler(e) {
+    if(localStorage.getItem('token')!=''){
+        Ctx.login(true)
+        const c = localStorage.getItem('email')
+        Ctx.email(c)
+        console.log(c)
+    }
+    function cartHandler(e) {
+        e.preventDefault()
         setshowcart(!showcart);
-        
-        e.preventDefault();
-        console.log(Ctx.arr)
-        try {
-            const response = await axios.get(`https://crudcrud.com/api/3da97b9609784182ab428b91f1be7ec0/${Ctx.curemail}`);
-            const responseData = response.data; // Accessing the data property of the response
-            
-            Ctx.setarr(responseData);
-            console.log('inside cart handler', showcart);
-            seterr(false)
-        } catch (error) {
-            console.error('Error fetching cart items:', error);
-            seterr(true)
-            // setTimeout((cartHandler(e)),500000)
-        }
     }
     
     return(
         <>
-        
-
             <Navbar bg='black' expand='sm' variant='light'>
                 <Container>
-                <Navbar.Brand style={{color:'white'}}>
+                {!Ctx.islog && <Navbar.Brand style={{color:'white'}}>
                     <NavLink to="/login" style={{color:'white'}}>Login</NavLink>
-                </Navbar.Brand>
+                </Navbar.Brand>}
                 <Navbar.Brand style={{color:'white'}}>
                         <NavLink to="/home">Home</NavLink>
                    
@@ -51,9 +42,14 @@ const Register=()=>{
                 <Navbar.Brand style={{color:'white'}}>
                     <NavLink to="/contact" style={{color:'white'}}>Contact US</NavLink>
                 </Navbar.Brand>
-                <Navbar.Brand style={{color:'white'}} href='/'>
+                {Ctx.islog && <Navbar.Brand style={{color:'white'}} href='/'>
                    <Button  onClick={cartHandler}>Cart</Button>
-                </Navbar.Brand>
+                </Navbar.Brand>}
+                {Ctx.islog && <Navbar.Brand style={{color:'white'}} href='/'>
+                   <Button  onClick={()=>{localStorage.setItem('token','')
+                    localStorage.setItem('email','')
+                   }}>Logout</Button>
+                </Navbar.Brand>}
 
 
                 </Container> 

@@ -23,7 +23,7 @@ const Contact=()=>{
             email:e.target.email.value
          }
          console.log(obj)
-        const response = await axios.post('https://crudcrud.com/api/97c8bfedc67a43379a751534516880fd/contact',obj)
+        const response = await axios.post('https://crudcrud.com/api/7215902f12ba4a66800c6f996eb23622/contact',obj)
         // setmodal(true)
 
     }

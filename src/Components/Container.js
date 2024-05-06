@@ -60,33 +60,65 @@ const Containerr=(props)=>{
         }
         
         ]
-    async function AddtoCart(ele,item){
-        console.log(Ctx)
-        const j = await axios.post(`https://crudcrud.com/api/3da97b9609784182ab428b91f1be7ec0/${Ctx.curemail}`,ele)
-        Ctx.additem(j.data,item)
-        console.log(j.data)
-        
+    async function Post(ele,props){
+        const j = await axios.put(`https://crudcrud.com/api/9c90c02f02874035aca202f560e4884d/${Ctx.curemail}/${ele._id}`,props)
+
+    }
+    async function AddtoCart(props, item){
+        console.log(Ctx.curemail)
+        // const j = await axios.post(`https://crudcrud.com/api/0eb261a202de4b0a8ec208c5e9e96945/${Ctx.curemail}`,props)
+        const get = await axios.get(`https://crudcrud.com/api/9c90c02f02874035aca202f560e4884d/${Ctx.curemail}`)
+        let found= false
+        const new_map = get.data.forEach((ele,item)=>{
+            
+            if(props.imageUrl===ele.imageUrl){
+                try{found=true
+                // const newarr= [...Ctx.arr]
+                // newarr[item].quantity++
+                props.quantity++
+                console.log(props,'purana maal h')
+                console.log(ele,Ctx.curemail)
+                Post(ele,props)
+                // Ctx.setarr(props)
+                console.log(Ctx.arr)
+                }            
+                catch{
+                    console.log('err')
+                }
+            }
+
+        })
+        if(found===false){
+            console.log(Ctx)
+            console.log('foundfalse')
+            const j = await axios.post(`https://crudcrud.com/api/9c90c02f02874035aca202f560e4884d/${Ctx.curemail}`,props)
+            // setarr(props)
+            console.log(j.data)
+            
+
+        }
+
     }
     return(
             <>
-                <Row className="justify-content-md-center" xs={3}>
-                    <Col > 
-                        <div>
-                        {productsArr.slice(0,productsArr.length/2).map((ele, item) => (
-                            <React.Fragment key={item}>
+                {/* <Row className="justify-content-md-center" xs={3}>
+                    <Col >  */}
+                        <div className="container">
+                        {productsArr.slice(0,productsArr.length).map((ele, item) => (
+                            <div className="albumcard" key={item}>
                                 <li><Link to={`/store/${ele.id}`}>{ele.title}</Link ></li>
                                 <img src={ele.imageUrl} alt={ele.title}></img>
                                 <p>$ {ele.price}</p>
                                 <Button onClick={()=>{AddtoCart(ele,item)}}>Add To Cart</Button>
                                 
-                            </React.Fragment>
+                            </div>
                         ))}
                         <hr></hr>
                         </div>
-                    </Col>
+                    {/* </Col>
                     
-                    <Col >
-                        {productsArr.slice(productsArr.length/2,productsArr.length).map((ele, item) => (
+                    <Col > */}
+                        {/* {productsArr.slice(productsArr.length/2,productsArr.length).map((ele, item) => (
                             <React.Fragment key={item}>
                                 <li><Link to={`/store/${ele.id}`}>{ele.title}</Link ></li>
                                 <img src={ele.imageUrl} alt={ele.title}></img>
@@ -96,9 +128,9 @@ const Containerr=(props)=>{
                             </React.Fragment>
                             
                         ))} 
-                        <hr></hr>
-                    </Col>
-                </Row>
+                        <hr></hr> */}
+                    {/* </Col>
+                </Row> */}
                 {/* <Button onClick={props.onCart}></Button> */}
                 <Card  style={{ height: '8rem',background:'#ADD8E6' }}>
                     <Card.Footer class='display-1'>

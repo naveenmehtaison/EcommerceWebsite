@@ -10,6 +10,23 @@ html {
 
 body {
   margin: 0;
-  background-color: #3f3f3f;
+  background-color: white;
+  overflow-y: auto;
+}
+.albumcard {
+  cursor: pointer;
+  /* display: flex; */
+  width: 300px;
+}
+
+.albumcard:hover {
+  border: 1px solid #3f3f3f; /* Example border style and color */
+  /* background-color: #3f3f3f; */ /* Uncomment this line if you want to change background color */
+}
+.container{
+  display: flex;
+  gap:50px;
+  overflow-y: auto;
+  flex-wrap: wrap;
 }
 

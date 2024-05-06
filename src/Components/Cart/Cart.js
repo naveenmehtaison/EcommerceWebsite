@@ -4,20 +4,32 @@ import classes from './Cart.module.css'
 import { useState,useContext } from "react";
 import DataContext from "../../Store/auth-context";
 import axios from "axios";
+import { useEffect } from "react";
 function Cart(props){
-    const [err,seterr]=useState(null)
     const [loading,setisloading] = useState(false)
-    console.log(props.props)
-    // if(props.props==false){
-    //     console.log('true hai')
-    //     seterr(true)
-    // }
-
-
-
-    console.log('inside cart,js')
+    const [cart,setcart]= useState([])
     const Ctx= useContext(DataContext)
-    const [arr,setarr]=useState(Ctx.arr)
+    useEffect(()=>{
+        async function datastore(){
+            setisloading(true)
+            const response = await axios.get(`https://crudcrud.com/api/9c90c02f02874035aca202f560e4884d/${Ctx.curemail}`);
+            // Ctx.setarr(response)
+            setisloading(false)
+            setcart(response.data)
+        
+            
+        }
+        datastore()
+        
+    },[])
+    console.log(Ctx.curemail)
+    console.log(Ctx.arr)
+    const d = [Ctx.arr]
+    
+    
+    const [err,seterr]=useState(null)
+
+    console.log(props.props)
    
     async function HandleDel  (ele, items) {
         
@@ -26,22 +38,20 @@ function Cart(props){
         try{
             console.log(ele)
 
-            const response = await axios.delete(`https://crudcrud.com/api/3da97b9609784182ab428b91f1be7ec0/${Ctx.curemail}/${ele._id}`)
-            const responseData= response.data
-        
-            Ctx.removeitem(ele,items)
-            setarr(responseData)
+            const response = await axios.delete(`https://crudcrud.com/api/9c90c02f02874035aca202f560e4884d/${Ctx.curemail}/${ele._id}`)
+            const response2 = await axios.get(`https://crudcrud.com/api/9c90c02f02874035aca202f560e4884d/${Ctx.curemail}`);
+            setcart(response2.data)
+            
         }
         catch(err){
             console.log(err.message)
-            setarr(err.message)
         }
-        // console.log(Ctx.arr.length)
         setisloading(false)
+
     }
     
     return(
-        <>
+        <div className={classes.backdrop}>
 
             <div className={classes.modal}>
                 <h1 align='center'>CART</h1>
@@ -57,12 +67,13 @@ function Cart(props){
                     
                     </Col>
                 </Row>
-                {!props.props && !loading && Ctx.arr.length==0&&
+                { !loading && cart.length==0&&
                 
                     <p>Cart is Empty</p>
                 }
-                {err && <p>{err.message}</p>}
-                {!props.props && !loading  && !err && Ctx.arr.map((ele,items)=>{
+                {loading && <p>Loading...</p>}
+                {/* {err && <p>{err.message}</p>} */}
+                {!props.props && !loading  && !err && cart.map((ele,items)=>{
                     return(
                     <Row>
                         <Col>
@@ -76,12 +87,12 @@ function Cart(props){
                         </Col>
                     </Row>)
                 })}
-                {props.props && <p>loading..</p> && <p>'Something went wrong ....Retrying <Button onClick={()=>{props.props=true}}>Retrying</Button></p>}
+                {/* {props.props && <p>loading..</p> && <p>'Something went wrong ....Retrying <Button onClick={()=>{props.props=true}}>Retrying</Button></p>} */}
                 
 
 
             </div>
-        </>
+        </div>
     )
 }
 export default Cart

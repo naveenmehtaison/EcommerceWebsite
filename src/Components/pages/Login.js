@@ -2,6 +2,8 @@ import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 import { useContext } from 'react'
 import DataContext from '../../Store/auth-context'
+import classes from './login.module.css'
+
 const Login=()=>{
     const Ctx = useContext(DataContext)
     const navigate = useNavigate()
@@ -17,7 +19,10 @@ const Login=()=>{
             })
             Ctx.login()
             const arr = obj.Email.split("")
-            console.log('arr',arr)
+            console.log(response.data.idToken)
+            localStorage.setItem('token',response.data.idToken)
+            
+
             const fil_arr = arr.filter((ele,item)=>(
                 ele!= '@' && ele!='.'
             ))
@@ -25,7 +30,8 @@ const Login=()=>{
             console.log(fin_email)
             console.log(fin_email)
             Ctx.email(fin_email)
-            console.log(Ctx)
+            localStorage.setItem('email',fin_email)
+            console.log(fin_email)
         }
         catch(err){
             console.log(err + 'erroer occured')
@@ -36,13 +42,38 @@ const Login=()=>{
 
     }
     return(
-        <form onSubmit={hanldeSubmit}>
-            <label htmlFor="email">Email</label>
-            <input type="email" id='email'></input>
-            <label htmlFor="password"></label>
-            <input type="password" id='password'></input>
-            <button type="submit"> Login</button>
-        </form>
+        <>
+  
+          <form onSubmit={hanldeSubmit} >
+            <div className={classes.control}>
+              <label htmlFor='email'>Your Email</label>
+              <input type='email' id='email' required />
+            </div>
+            <div className={classes.control}>
+              <label htmlFor='password'>Your Password</label>
+              <input
+                type='password'
+                id='password'
+                required
+              />
+            </div>
+            <div className={classes.actions}>
+              <button type='submit'>
+                Submit Data
+              </button>
+              <button 
+                type='button'
+                className={classes.toggle}
+                onClick={switchAuthModeHandler}
+              >
+
+              </button>
+    
+            </div>
+          </form>
+
+        </>
+
     )
 }
 export default Login
